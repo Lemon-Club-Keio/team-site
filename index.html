@@ -1,38 +1,569 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- サイト名を変更してください -->
-  <title>サイト名</title>
+  <title>湘南デジタル未来大学</title>
   <!-- 共通スタイル（ヘッダー・ナビ・フッター） -->
   <link rel="stylesheet" href="css/common.css">
 </head>
+
 <body>
 
   <!-- ===== ヘッダー（common.css で管理） ===== -->
-  <!-- サイト名・リンク先を変えたいときは css/common.css ではなくここのテキストを編集してください -->
   <header class="site-header">
     <nav class="site-nav">
-      <a href="index.html" class="nav-logo">サイト名</a>
+      <a href="index.html" class="nav-logo">湘南デジタル未来大学</a>
       <ul class="nav-links">
         <li><a href="index.html">トップ</a></li>
-        <li><a href="page1/index.html">ページ1</a></li>
-        <li><a href="page2/index.html">ページ2</a></li>
+        <li><a href="page1/index.html">About</a></li>
+        <li><a href="page2/index.html">学部紹介</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- ===== メインコンテンツ ===== -->
-  <main>
-    <!-- ここにコンテンツを追加してください -->
+  <main class="sdx-wrapper">
+    <style>
+      /* Google Fonts */
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+      /* Scoped styling under .sdx-wrapper */
+      .sdx-wrapper {
+        --sdx-font-sans: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
+        --sdx-clr-primary: #1e3a8a; /* Calm Navy Blue */
+        --sdx-clr-primary-rgb: 30, 58, 138;
+        --sdx-clr-secondary: #2563eb; /* Royal Blue */
+        --sdx-clr-accent: #475569; /* Slate Gray */
+        --sdx-clr-text-main: #0f172a; /* Dark Slate Navy */
+        --sdx-clr-text-muted: #475569;
+        --sdx-clr-bg-light: #f1f5f9; /* Soft Slate Light */
+        --sdx-clr-white: #ffffff;
+        --sdx-card-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.04), 0 8px 10px -6px rgba(30, 58, 138, 0.04);
+        --sdx-card-shadow-hover: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 10px 10px -6px rgba(30, 58, 138, 0.1);
+        --sdx-transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        font-family: var(--sdx-font-sans);
+        color: var(--sdx-clr-text-main);
+        background-color: var(--sdx-clr-white);
+        line-height: 1.7;
+      }
+
+      .sdx-wrapper section {
+        padding: 80px 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+
+      .sdx-section-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .sdx-section-subtitle {
+        text-align: center;
+        color: var(--sdx-clr-text-muted);
+        font-size: 1rem;
+        margin-bottom: 48px;
+        font-weight: 500;
+      }
+
+      /* Hero Section (Catchphrase) */
+      .sdx-hero {
+        text-align: center;
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
+      }
+
+      .sdx-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(30, 58, 138, 0.05);
+        color: var(--sdx-clr-primary);
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+        border: 1px solid rgba(30, 58, 138, 0.1);
+      }
+
+      .sdx-badge-pulse {
+        display: inline-block;
+        color: var(--sdx-clr-secondary);
+        animation: sdx-pulse 2s infinite;
+      }
+
+      @keyframes sdx-pulse {
+        0% { transform: scale(0.95); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.5; }
+      }
+
+      .sdx-hero-title {
+        font-size: 3.8rem;
+        font-weight: 800;
+        line-height: 1.3;
+        margin-bottom: 24px;
+        letter-spacing: -0.03em;
+        color: #0f172a;
+      }
+
+      .sdx-hero-title span {
+        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .sdx-hero-desc {
+        font-size: 1.2rem;
+        color: var(--sdx-clr-text-muted);
+        margin: 0 auto 40px auto;
+        max-width: 700px;
+        line-height: 1.8;
+      }
+
+      .sdx-hero-btns {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .sdx-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: var(--sdx-transition-smooth);
+        cursor: pointer;
+      }
+
+      .sdx-btn-primary {
+        background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        color: var(--sdx-clr-white);
+        box-shadow: 0 4px 14px rgba(30, 58, 138, 0.2);
+      }
+
+      .sdx-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+      }
+
+      .sdx-btn-secondary {
+        background: var(--sdx-clr-white);
+        color: var(--sdx-clr-primary);
+        border: 1px solid rgba(30, 58, 138, 0.15);
+      }
+
+      .sdx-btn-secondary:hover {
+        background: var(--sdx-clr-bg-light);
+        border-color: var(--sdx-clr-primary);
+        transform: translateY(-2px);
+      }
+
+      /* News Section */
+      .sdx-news-section {
+        background-color: var(--sdx-clr-bg-light);
+        border-radius: 32px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .sdx-news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .sdx-news-card {
+        background: var(--sdx-clr-white);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: var(--sdx-card-shadow);
+        transition: var(--sdx-transition-smooth);
+        border: 1px solid rgba(30, 58, 138, 0.02);
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .sdx-news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--sdx-card-shadow-hover);
+        border-color: rgba(30, 58, 138, 0.15);
+      }
+
+      .sdx-news-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .sdx-news-date {
+        font-size: 0.85rem;
+        color: var(--sdx-clr-text-muted);
+        font-weight: 500;
+      }
+
+      .sdx-news-tag {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .sdx-tag-event {
+        background: rgba(30, 58, 138, 0.06);
+        color: var(--sdx-clr-primary);
+      }
+
+      .sdx-tag-info {
+        background: rgba(71, 85, 105, 0.06);
+        color: var(--sdx-clr-accent);
+      }
+
+      .sdx-news-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 16px;
+        color: #0f172a;
+      }
+
+      .sdx-news-more {
+        margin-top: auto;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--sdx-clr-primary);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: var(--sdx-transition-smooth);
+      }
+
+      .sdx-news-card:hover .sdx-news-more {
+        gap: 8px;
+      }
+
+      /* Student Life Section (学生の様子) */
+      .sdx-student-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 20px;
+      }
+
+      .sdx-student-card {
+        background: var(--sdx-clr-white);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: var(--sdx-card-shadow);
+        border: 1px solid rgba(30, 58, 138, 0.02);
+        transition: var(--sdx-transition-smooth);
+      }
+
+      .sdx-student-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--sdx-card-shadow-hover);
+        border-color: rgba(30, 58, 138, 0.15);
+      }
+
+      .sdx-student-icon {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+
+      .sdx-student-card-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #0f172a;
+      }
+
+      .sdx-student-card-desc {
+        font-size: 0.95rem;
+        color: var(--sdx-clr-text-muted);
+      }
+
+      /* Location Section (キャンパス所在地) */
+      .sdx-location-section {
+        background-color: var(--sdx-clr-bg-light);
+        border-radius: 32px;
+        margin-bottom: 80px;
+      }
+
+      .sdx-location-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .sdx-location-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sdx-location-title-sub {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .sdx-location-address {
+        font-size: 1.05rem;
+        color: var(--sdx-clr-text-main);
+        font-weight: 500;
+        background: var(--sdx-clr-white);
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: var(--sdx-card-shadow);
+        border-left: 4px solid var(--sdx-clr-primary);
+      }
+
+      .sdx-location-access-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .sdx-location-access-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.95rem;
+        color: var(--sdx-clr-text-muted);
+      }
+
+      .sdx-location-access-item strong {
+        color: #0f172a;
+        min-width: 140px;
+      }
+
+      /* Styled CSS Map Placeholder */
+      .sdx-location-visual {
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        border-radius: 20px;
+        padding: 40px;
+        color: var(--sdx-clr-white);
+        box-shadow: var(--sdx-card-shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sdx-location-visual::before {
+        content: '';
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+        top: -50px;
+        right: -50px;
+        filter: blur(20px);
+      }
+
+      .sdx-map-heading {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sdx-map-desc {
+        font-size: 0.9rem;
+        opacity: 0.85;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .sdx-map-badge-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .sdx-map-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 968px) {
+        .sdx-hero-title {
+          font-size: 2.8rem;
+        }
+
+        .sdx-news-grid,
+        .sdx-student-grid,
+        .sdx-location-container {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .sdx-location-container {
+          gap: 36px;
+        }
+      }
+    </style>
+
+    <!-- Hero Section (Catchphrase) -->
+    <section class="sdx-hero" id="sdx-hero-section">
+      <div class="sdx-hero-content">
+        <div class="sdx-hero-badge">
+          <span class="sdx-badge-pulse">●</span> 湘南デジタル未来大学
+        </div>
+        <h1 class="sdx-hero-title">
+          湘南から、<br>
+          <span>デジタルで未来を創る。</span>
+        </h1>
+        <p class="sdx-hero-desc">
+          最先端のITスキル、クリエイティブ表現、精度を高める実践力を培い、まだ見ぬ未来のデジタル社会をリードする人材を育成する新しいデジタル特化大学です。
+        </p>
+        <div class="sdx-hero-btns">
+          <a href="#sdx-location" class="sdx-btn sdx-btn-primary" id="btn-hero-brochure">キャンパス所在地を見る</a>
+          <a href="#sdx-news" class="sdx-btn sdx-btn-secondary" id="btn-hero-more">最新のニュース</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="sdx-news-section" id="sdx-news">
+      <h2 class="sdx-section-title">ニュース＆トピックス</h2>
+      <p class="sdx-section-subtitle">大学の最新情報やイベント情報をお届けします</p>
+      <div class="sdx-news-grid">
+        <a href="news/news1.html" class="sdx-news-card" id="news-item-1">
+          <div class="sdx-news-meta">
+            <span class="sdx-news-date">2026.06.23</span>
+            <span class="sdx-news-tag sdx-tag-event">イベント</span>
+          </div>
+          <h3 class="sdx-news-title">【7月19日開催】夏のプレミアムオープンキャンパス開催決定！模擬講義も実施します。</h3>
+          <span class="sdx-news-more">詳細を見る →</span>
+        </a>
+        <a href="news/news2.html" class="sdx-news-card" id="news-item-2">
+          <div class="sdx-news-meta">
+            <span class="sdx-news-date">2026.06.15</span>
+            <span class="sdx-news-tag sdx-tag-info">重要</span>
+          </div>
+          <h3 class="sdx-news-title">2027年度春期AO入学試験の概要および募集要項を公開いたしました。</h3>
+          <span class="sdx-news-more">詳細を見る →</span>
+        </a>
+        <a href="news/news3.html" class="sdx-news-card" id="news-item-3">
+          <div class="sdx-news-meta">
+            <span class="sdx-news-date">2026.06.01</span>
+            <span class="sdx-news-tag sdx-tag-event">プレスリリース</span>
+          </div>
+          <h3 class="sdx-news-title">地元湘南のDX推進に向けて、藤沢市との包括連携協定を締結しました。</h3>
+          <span class="sdx-news-more">詳細を見る →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Student Life Section (学生の様子) -->
+    <section id="sdx-students">
+      <h2 class="sdx-section-title">学生の様子</h2>
+      <p class="sdx-section-subtitle">社会と繋がり、デジタルで表現し、共創する日々</p>
+      <div class="sdx-student-grid">
+        <!-- Card 1 -->
+        <div class="sdx-student-card" id="student-card-1">
+          <span class="sdx-student-icon">💻</span>
+          <h3 class="sdx-student-card-title">実践的なプロダクト開発</h3>
+          <p class="sdx-student-card-desc">
+            授業は座学にとどまらず、少人数チームでのWebアプリ開発やAIモデル構築など、現役エンジニアの指導のもとで活発なコーディング・グループワークを行っています。
+          </p>
+        </div>
+        <!-- Card 2 -->
+        <div class="sdx-student-card" id="student-card-2">
+          <span class="sdx-student-icon">🎨</span>
+          <h3 class="sdx-student-card-title">個性を活かしたデザイン創出</h3>
+          <p class="sdx-student-card-desc">
+            3D CG、UI/UXプロトタイピング、XRコンテンツ制作など、最先端のクリエイティブ制作ツールを使用し、各自のビジョンを視覚的・体感的なデザインとして形にしています。
+          </p>
+        </div>
+        <!-- Card 3 -->
+        <div class="sdx-student-card" id="student-card-3">
+          <span class="sdx-student-icon">🤝</span>
+          <h3 class="sdx-student-card-title">地域と繋がるDXハッカソン</h3>
+          <p class="sdx-student-card-desc">
+            湘南エリア of 自治体や地元企業とタッグを組み、リアルな地域課題を解決するためのDXソリューション提案やアイデアソンに、学年を超えて挑戦しています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section (キャンパス所在地) -->
+    <section class="sdx-location-section" id="sdx-location">
+      <h2 class="sdx-section-title">キャンパス所在地・アクセス</h2>
+      <p class="sdx-section-subtitle">インスピレーションが生まれる海岸沿いの最先端拠点</p>
+      <div class="sdx-location-container">
+        <div class="sdx-location-info">
+          <h3 class="sdx-location-title-sub">湘南・辻堂オーシャンキャンパス</h3>
+          <div class="sdx-location-address">
+            📍 〒251-0041 神奈川県藤沢市辻堂神台 1丁目X-X
+          </div>
+          <div class="sdx-location-access-list">
+            <div class="sdx-location-access-item">
+              <strong>🚃 JR東海道線:</strong>
+              <span>「辻堂」駅 北口より徒歩3分（ペデストリアンデッキ直結）</span>
+            </div>
+            <div class="sdx-location-access-item">
+              <strong>🚃 小田急江ノ島線:</strong>
+              <span>「藤沢」駅乗換、JR東海道線で1駅（約4分）</span>
+            </div>
+            <div class="sdx-location-access-item">
+              <strong>🚘 車でのアクセス:</strong>
+              <span>新湘南バイパス「藤沢IC」より約10分</span>
+            </div>
+          </div>
+        </div>
+        <div class="sdx-location-visual">
+          <div class="sdx-map-heading">🗺 湘南・辻堂について</div>
+          <p class="sdx-map-desc">
+            辻堂駅前は商業施設や最先端オフィスの集まるDX特区として進化を遂げる一方、海までは自転車で約10分の好立地。仕事と遊び、デジタル技術と豊かな自然がシンクロするクリエイティブなフィールドです。
+          </p>
+          <div class="sdx-map-badge-grid">
+            <span class="sdx-map-badge">🌊 湘南の風</span>
+            <span class="sdx-map-badge">🚀 駅チカ徒歩3分</span>
+            <span class="sdx-map-badge">💻 開発環境24時間開放</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ===== フッター（common.css で管理） ===== -->
-  <!-- チーム名・年を変更してください -->
   <footer class="site-footer">
-    <p>&copy; 2026 チーム名</p>
+    <p>&copy; 2026 湘南デジタル未来大学</p>
   </footer>
 
 </body>
+
 </html>
