@@ -5,3 +5,426 @@
 
    【注意】他のページには影響しないので、遠慮なく書いてOKです。
    ============================================================ */
+
+/* ===== ログインページ専用スタイル ===== */
+
+.login-main {
+  position: relative;
+  min-height: calc(100vh - 56px - 60px); /* ビューポート高さからヘッダーとフッターを引いた高さ */
+  background: linear-gradient(135deg, #0d0d0d 0%, #161616 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 背景の光るオーブ（装飾） */
+.background-glows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+}
+
+.orb-1 {
+  width: 350px;
+  height: 350px;
+  background: var(--color-primary); /* ゴールド */
+  top: 15%;
+  left: 10%;
+  animation: float-orb-1 25s infinite alternate ease-in-out;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: #ffffff;
+  bottom: 20%;
+  right: 15%;
+  animation: float-orb-2 20s infinite alternate ease-in-out;
+}
+
+@keyframes float-orb-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 40px) scale(1.15); }
+}
+
+@keyframes float-orb-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-50px, -60px) scale(0.9); }
+}
+
+/* ログインカードラッパー */
+.login-card-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 560px;
+  padding: 24px;
+}
+
+/* ガラスモフィズムカード */
+.login-card {
+  background: rgba(26, 26, 26, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+              border-color 0.4s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* カードヘッダー */
+.card-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.card-header h1 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.card-header p {
+  color: #8e8e93;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* フォームと入力グループ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 18px 16px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.25s ease, 
+              box-shadow 0.25s ease, 
+              background-color 0.25s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(245, 197, 24, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* エラー時の入力境界線 */
+.input-field.error-border {
+  border-color: #ff453a !important;
+  box-shadow: 0 0 0 4px rgba(255, 69, 58, 0.18) !important;
+}
+
+/* フローティングラベル */
+.input-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8e8e93;
+  font-size: 1rem;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+  transform-origin: left top;
+}
+
+/* フォーカス時、または値が入っている時にラベルを上部へ移動 */
+.input-field:focus ~ .input-label,
+.input-field:not(:placeholder-shown) ~ .input-label {
+  top: 8px;
+  transform: translateY(0) scale(0.75);
+  color: var(--color-primary);
+}
+
+/* エラー時のラベル色 */
+.input-field.error-border ~ .input-label {
+  color: #ff453a;
+}
+
+/* パスワードラッパーとトグル */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .input-field {
+  padding-right: 50px; /* 目玉アイコン用の余白 */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #8e8e93;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  z-index: 3;
+}
+
+.password-toggle:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.password-toggle .hidden {
+  display: none;
+}
+
+/* エラーメッセージ */
+.error-msg {
+  color: #ff453a;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: block;
+  min-height: 18px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.error-msg.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* チェックボックスとパスワードを忘れた場合のリンク */
+.form-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  font-size: 0.9rem;
+}
+
+/* カスタムチェックボックス */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #aeaeb2;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-container input {
+  display: none;
+}
+
+.checkbox-checkmark {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  display: inline-block;
+  position: relative;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.checkbox-container:hover input ~ .checkbox-checkmark {
+  border-color: var(--color-primary);
+}
+
+.checkbox-container input:checked ~ .checkbox-checkmark {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-container input:checked ~ .checkbox-checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 5px;
+  height: 9px;
+  border: solid #121212;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-text {
+  transition: color 0.2s;
+}
+
+.checkbox-container:hover .checkbox-text {
+  color: #ffffff;
+}
+
+.forgot-password-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.forgot-password-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+/* 送信ボタン */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--color-primary);
+  color: #121212;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, 
+              box-shadow 0.2s ease, 
+              background-color 0.2s ease,
+              opacity 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(245, 197, 24, 0.15);
+}
+
+.submit-btn:hover {
+  background: #e0b310;
+  box-shadow: 0 8px 24px rgba(245, 197, 24, 0.28);
+  transform: translateY(-1px);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(245, 197, 24, 0.1);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(18, 18, 18, 0.2);
+  border-top-color: #121212;
+  border-radius: 50%;
+  position: absolute;
+  animation: spin 0.8s linear infinite;
+}
+
+.btn-spinner.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* カードフッター */
+.card-footer {
+  margin-top: 36px;
+  text-align: center;
+  color: #8e8e93;
+  font-size: 0.9rem;
+}
+
+.signup-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  margin-left: 4px;
+}
+
+.signup-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+/* エラー時のフォーム全体の揺れアニメーション */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+/* オートフィル（自動入力）時のブラウザ標準の黄色い背景を上書き */
+.input-field:-webkit-autofill,
+.input-field:-webkit-autofill:hover, 
+.input-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+  
+  .card-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

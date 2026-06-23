@@ -1,32 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- ページタイトルを変更してください（例：アクセス | カフェ名） -->
-  <title>ページ2 | サイト名</title>
+  <title>ログイン</title>
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- 共通スタイル（ヘッダー・ナビ・フッター） -->
   <link rel="stylesheet" href="../css/common.css">
   <!-- このページ専用スタイル（style.css に自由に書いてください） -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- ===== ヘッダー（common.css で管理） ===== -->
   <header class="site-header">
     <nav class="site-nav">
       <a href="../index.html" class="nav-logo">サイト名</a>
-      <ul class="nav-links">
-        <li><a href="../index.html">トップ</a></li>
-        <li><a href="../page1/index.html">ページ1</a></li>
-        <li><a href="index.html">ページ2</a></li>
-      </ul>
     </nav>
   </header>
 
   <!-- ===== メインコンテンツ ===== -->
-  <main>
-    <!-- ここにコンテンツを追加してください -->
+  <main class="login-main">
+    <div class="background-glows">
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="login-card-wrapper">
+      <div class="login-card">
+        <div class="card-header">
+          <h1>ログイン</h1>
+        </div>
+
+        <form id="loginForm" class="login-form" novalidate>
+          <div class="input-group">
+            <input type="email" id="email" class="input-field" placeholder=" " required autocomplete="email">
+            <label for="email" class="input-label">Email Address</label>
+            <span class="error-msg" id="emailError"></span>
+          </div>
+
+          <div class="input-group">
+            <div class="password-wrapper">
+              <input type="password" id="password" class="input-field" placeholder=" " required
+                autocomplete="current-password">
+              <label for="password" class="input-label">Password</label>
+              <button type="button" id="passwordToggle" class="password-toggle" aria-label="Toggle password visibility">
+                <!-- Eye icon SVG -->
+                <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <!-- Eye off icon SVG (hidden by default) -->
+                <svg class="eye-off-icon hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                  </path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+            <span class="error-msg" id="passwordError"></span>
+          </div>
+
+          <div class="form-actions-row">
+            <label class="checkbox-container">
+              <input type="checkbox" id="rememberMe">
+              <span class="checkbox-checkmark"></span>
+              <span class="checkbox-text">ログイン状態を保持する</span>
+            </label>
+            <a href="#" class="forgot-password-link">パスワードをお忘れですか？</a>
+          </div>
+
+          <button type="submit" id="submitBtn" class="submit-btn">
+            <span class="btn-text">ログイン</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+
+        <div class="card-footer">
+          <p>アカウントをお持ちでない方 <a href="#" class="signup-link">アカウントを作成</a></p>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- ===== フッター（common.css で管理） ===== -->
@@ -34,5 +96,7 @@
     <p>&copy; 2026 チーム名</p>
   </footer>
 
+  <script src="login.js" defer></script>
 </body>
+
 </html>
