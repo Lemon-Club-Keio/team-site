@@ -1,26 +1,23 @@
 /* ============================================================
-   common.css — 全ページ共通スタイル
-   ヘッダー・ナビゲーション・フッターを管理しています。
-
-   【重要】このファイルを変更する場合は
-   チーム全員に相談してから変更してください。
-   個人ページのスタイルは各ページの style.css に書いてください。
+   common.css — 全ページ共通スタイル（BAR 宵桜 サイバーネオンテーマ）
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap');
 
-/* ===== カラー変数 =====
-   サイト全体の色はここで一括管理しています。
-   チームで話し合って色を決めたら、ここの値を書き換えてください。
-   ============================================================ */
 :root {
-  --color-primary:     #F5C518; /* メインカラー（ロゴ・アクセント） */
-  --color-text:        #333333; /* 本文テキスト */
-  --color-bg:          #ffffff; /* ページ背景 */
-  --color-header-bg:   #1a1a1a; /* ヘッダー背景 */
-  --color-footer-bg:   #1a1a1a; /* フッター背景 */
-  --color-footer-text: #cccccc; /* フッターテキスト */
+  --color-primary:     #ff2a85; /* 宵桜ネオンピンク */
+  --color-accent:      #ffd700; /* ネオンゴールド */
+  --color-secondary:   #00f0ff; /* ネオンシアン */
+  --color-text:        #f3f4f6; /* 明るいテキスト */
+  --color-text-muted:  #9ca3af; /* 薄いテキスト */
+  --color-bg:          #070709; /* 漆黒背景 */
+  --color-bg-panel:    rgba(18, 18, 24, 0.75); /* ガラスマフィズム用半透明パネル */
+  --color-border:      rgba(255, 42, 133, 0.2); /* ピンクボーダー */
+  --color-border-glow: rgba(255, 42, 133, 0.4);
+  
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
 }
-
 
 /* ===== 最小リセット ===== */
 *, *::before, *::after {
@@ -30,63 +27,211 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: var(--font-sans);
   color: var(--color-text);
   background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 42, 133, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(0, 240, 255, 0.05) 0px, transparent 50%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-
-/* ============================================================
-   ここより下は触らないでください。
-   レイアウトが崩れる原因になります。
-   変更が必要な場合は必ずチームに相談してください。
-   ============================================================ */
-
+/* ===== スクロールバー ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d11;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
 
 /* ===== ヘッダー ===== */
 .site-header {
-  background-color: var(--color-header-bg);
-  padding: 0 24px;
+  background-color: rgba(7, 7, 9, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .site-nav {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  height: 56px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 24px;
 }
 
 .nav-logo {
-  color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-serif);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(255, 42, 133, 0.6);
+  transition: all 0.3s ease;
+}
+
+.nav-logo span {
+  color: var(--color-primary);
+}
+
+.nav-logo:hover {
+  text-shadow: 0 0 15px rgba(255, 42, 133, 0.9), 0 0 25px rgba(255, 42, 133, 0.4);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 32px;
 }
 
 .nav-links a {
-  color: #ffffff;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links li.active a {
+  color: var(--color-primary);
+  text-shadow: 0 0 8px rgba(255, 42, 133, 0.5);
+}
+
+.nav-links li.active a::after {
+  width: 100%;
+}
+
+/* 認証セクション */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-display {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: rgba(255, 215, 0, 0.05);
+  letter-spacing: 0.5px;
+}
+
+.btn-auth {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-primary);
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-auth:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 15px var(--color-primary);
+}
+
+/* ===== レイアウト ===== */
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
 
 /* ===== フッター ===== */
 .site-footer {
   background-color: var(--color-footer-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--color-footer-text);
   text-align: center;
-  padding: 20px;
+  padding: 24px;
   font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* ===== 共通コンポーネント: ガラスマフィズムカード ===== */
+.glass-panel {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--color-border-glow);
+  box-shadow: 0 8px 32px 0 rgba(255, 42, 133, 0.15);
+}
+
+/* ===== アラート/メッセージ ===== */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+.alert-error {
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+.alert-success {
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #a7f3d0;
 }

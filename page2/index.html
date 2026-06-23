@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ページタイトルを変更してください（例：アクセス | カフェ名） -->
-  <title>ページ2 | サイト名</title>
+  <title>ページ2 | BAR 宵桜</title>
   <!-- 共通スタイル（ヘッダー・ナビ・フッター） -->
   <link rel="stylesheet" href="../css/common.css">
   <!-- このページ専用スタイル（style.css に自由に書いてください） -->
@@ -15,24 +15,29 @@
   <!-- ===== ヘッダー（common.css で管理） ===== -->
   <header class="site-header">
     <nav class="site-nav">
-      <a href="../index.html" class="nav-logo">サイト名</a>
+      <a href="../index.html" class="nav-logo">BAR <span>宵桜</span></a>
       <ul class="nav-links">
         <li><a href="../index.html">トップ</a></li>
         <li><a href="../page1/index.html">ページ1</a></li>
-        <li><a href="index.html">ページ2</a></li>
+        <li class="active"><a href="index.html">ページ2</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- ===== メインコンテンツ ===== -->
   <main>
-    <!-- ここにコンテンツを追加してください -->
+    <div class="glass-panel" style="max-width: 800px; margin: 40px auto; text-align: center; padding: 40px;">
+      <h1 style="font-family: var(--font-serif); color: #fff; margin-bottom: 20px;">ページ2</h1>
+      <p style="color: var(--color-text-muted);">ここにはコンテンツがありません。自由に追加してください。</p>
+    </div>
   </main>
 
   <!-- ===== フッター（common.css で管理） ===== -->
   <footer class="site-footer">
-    <p>&copy; 2026 チーム名</p>
+    <p>&copy; 2026 BAR 宵桜 (Yoizakura)</p>
   </footer>
+
+  <script src="../js/auth.js"></script>
 
 </body>
 </html>

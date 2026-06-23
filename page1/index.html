@@ -3,36 +3,567 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- ページタイトルを変更してください（例：メニュー | カフェ名） -->
-  <title>ページ1 | サイト名</title>
-  <!-- 共通スタイル（ヘッダー・ナビ・フッター） -->
+  <title>ゲーム | BAR 宵桜</title>
+  <!-- 共通スタイル -->
   <link rel="stylesheet" href="../css/common.css">
-  <!-- このページ専用スタイル（style.css に自由に書いてください） -->
+  <!-- ページ1専用スタイル -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===== ヘッダー（common.css で管理） ===== -->
+  <!-- ===== ヘッダー ===== -->
   <header class="site-header">
     <nav class="site-nav">
-      <a href="../index.html" class="nav-logo">サイト名</a>
+      <a href="../index.html" class="nav-logo">BAR <span>宵桜</span></a>
       <ul class="nav-links">
         <li><a href="../index.html">トップ</a></li>
-        <li><a href="index.html">ページ1</a></li>
-        <li><a href="../page2/index.html">ページ2</a></li>
+        <li class="active"><a href="index.html">ページ1</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- ===== メインコンテンツ ===== -->
   <main>
-    <!-- ここにコンテンツを追加してください -->
+    
+    <!-- タブ切り替えボタン -->
+    <div class="tab-container">
+      <button class="tab-btn active" onclick="switchTab('game')">🎮 ゲーム</button>
+      <button class="tab-btn" onclick="switchTab('stats')">🏆 戦績とランキング</button>
+      <button class="tab-btn" onclick="switchTab('catalog')">📖 宵桜図鑑</button>
+    </div>
+
+    <!-- ===== タブ1: ゲームプレイ ===== -->
+    <div id="tab-content-game" class="tab-content active">
+      <div class="game-wrapper">
+        <div class="game-container">
+          
+          <!-- ゲームキャンバス -->
+          <canvas id="game-canvas"></canvas>
+
+          <!-- スタート画面 -->
+          <div id="start-overlay" class="overlay">
+            <h1 class="overlay-title">酒避け千鳥足</h1>
+            <p class="overlay-subtitle">
+              迫り来るお酒を避けて、酔い潰れずに走り続けろ！<br>
+              アルコール度数が高いお酒ほど大ダメージ。
+            </p>
+
+            <div class="instructions-card">
+              <h3>ルール説明</h3>
+              <ul>
+                <li><strong>操作:</strong> 左右矢印キー（A/D）または画面左右タップ</li>
+                <li><strong>千鳥足:</strong> 酔うと勝手に左右にフラつき、動きが重くなります！</li>
+                <li><strong>酔いペナルティ:</strong> 視界がぼやけ、画面がグラグラ揺れます</li>
+                <li><strong>回復:</strong> たまに出現する<strong>水（チェイサー）</strong>で酔い回復</li>
+              </ul>
+            </div>
+
+            <div id="start-actions" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+              <!-- JSでログイン状況に合わせて動的に挿入されます -->
+            </div>
+          </div>
+
+          <!-- リザルト画面 -->
+          <div id="result-overlay" class="overlay" style="display: none;">
+            <h1 class="overlay-title">酔い潰れました</h1>
+            
+            <div id="fatal-section" class="fatal-container">
+              <div class="fatal-label">💀 とどめの一杯 💀</div>
+              <div id="fatal-drink-name" class="fatal-name">-</div>
+            </div>
+
+            <div class="score-display">
+              <span style="color:var(--color-text-muted); font-size:0.9rem;">今回の走行距離:</span>
+              <span id="final-score" style="font-size:2rem; font-weight:bold; color:var(--color-accent); margin-left:8px; font-family:'Montserrat';">0</span>
+              <span style="color:var(--color-accent); font-size:1rem; font-weight:bold;"> m</span>
+            </div>
+
+            <!-- 今回の被弾詳細 -->
+            <div class="result-stats-container">
+              <table class="result-table">
+                <thead>
+                  <tr>
+                    <th>当てられたお酒</th>
+                    <th>度数</th>
+                    <th style="text-align: right;">被弾数</th>
+                  </tr>
+                </thead>
+                <tbody id="stats-tbody">
+                  <!-- JSで動的挿入 -->
+                </tbody>
+              </table>
+            </div>
+
+            <button id="retry-btn" class="btn-neon btn-neon-accent" style="width: 100%; max-width: 320px;">もう一度挑戦する</button>
+            <button class="btn-neon btn-neon-secondary" onclick="switchTab('stats')" style="width: 100%; max-width: 320px;">戦績・ランキングを見る</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== タブ2: 戦績とランキング ===== -->
+    <div id="tab-content-stats" class="tab-content">
+      <div class="stats-grid">
+        
+        <!-- 左カラム：ランキング -->
+        <div class="glass-panel stats-card">
+          <h2 class="card-title">🏆 ハイスコアランキング</h2>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px; text-align: center;">順位</th>
+                  <th>名前</th>
+                  <th style="text-align: right;">走破距離</th>
+                  <th style="text-align: right; width: 100px;">日付</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-tbody">
+                <!-- JSで動的ロード -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 右カラム：個人統計 -->
+        <div class="glass-panel stats-card">
+          <h2 class="card-title">📊 累計被弾統計 (<span id="stats-user-display">ゲスト</span>)</h2>
+          
+          <div class="global-summary">
+            <div class="summary-item">
+              <span class="summary-label">総来店数</span>
+              <span class="summary-value" id="stat-play-count">0</span>
+              <span class="summary-unit">回</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">総走破距離</span>
+              <span class="summary-value" id="stat-total-distance">0</span>
+              <span class="summary-unit">m</span>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1rem; color: var(--color-accent); margin: 20px 0 10px 0;">お酒別・被弾比率</h3>
+          <div class="chart-container" id="bar-chart-container">
+            <!-- JSで動的棒グラフ -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== タブ3: 図鑑カタログ ===== -->
+    <div id="tab-content-catalog" class="tab-content">
+      <div style="margin-bottom: 30px; text-align: center;">
+        <h1 style="font-family: var(--font-serif); font-size: 2rem; color: #fff; text-shadow: 0 0 10px rgba(255, 42, 133, 0.4);">
+          🍶 宵桜 銘柄図鑑
+        </h1>
+        <p style="color: var(--color-text-muted); margin-top: 6px;">
+          ゲーム中に登場する8種のお酒の効能とアルコール度数のご案内。
+        </p>
+      </div>
+
+      <div class="catalog-grid" id="catalog-container">
+        <!-- JSで動的構築 -->
+      </div>
+    </div>
+
   </main>
 
-  <!-- ===== フッター（common.css で管理） ===== -->
+  <!-- ===== ログイン・新規登録モーダル ===== -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="glass-panel modal-content" style="position: relative;">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h2 class="modal-title">BAR 宵桜 会員証</h2>
+      
+      <div id="auth-alert" class="alert alert-error" style="display: none;"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="auth-username">ユーザー名 (Username)</label>
+        <input type="text" id="auth-username" class="form-input" placeholder="3文字以上で入力" autocomplete="username">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 24px;">
+        <label class="form-label" for="auth-password">暗証番号 (Password)</label>
+        <input type="password" id="auth-password" class="form-input" placeholder="4文字以上で入力" autocomplete="current-password">
+      </div>
+
+      <div class="modal-buttons">
+        <button id="login-submit-btn" class="btn-neon" style="margin:0;">ログイン</button>
+        <button id="register-submit-btn" class="btn-neon btn-neon-secondary" style="margin:0;">新規会員登録</button>
+      </div>
+
+      <p style="font-size:0.75rem; color:var(--color-text-muted); text-align:center; margin-top:20px; line-height:1.5;">
+        ※会員登録してプレイすると、ハイスコアがご自身のユーザー名でランキングに保存されます。
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== フッター ===== -->
   <footer class="site-footer">
-    <p>&copy; 2026 チーム名</p>
+    <p>&copy; 2026 BAR 宵桜 (Yoizakura)</p>
   </footer>
 
+  <!-- スクリプトのロード -->
+  <script src="../js/auth.js"></script>
+  <script src="../js/game.js"></script>
+
+  <!-- page1 統合コントローラ -->
+  <script>
+    // お酒図鑑のデータ (画像パスはルートの images/ を指定)
+    const CATALOG_DRINKS = [
+      {
+        id: 'taiwan_beer',
+        name: '台湾ビール',
+        abv: 4,
+        damage: '微小 (+4%)',
+        color: '#00f5d4',
+        image: '../images/cocktail.png',
+        desc: 'すっきり軽快な南国ビール。酔いは軽いが、油断するとジワジワ足元に来る。落下スピードは遅め。'
+      },
+      {
+        id: 'beer',
+        name: 'ビール',
+        abv: 5,
+        damage: '小 (+5%)',
+        color: '#ffb703',
+        image: '../images/cocktail.png',
+        desc: '麦の香りが心地よい定番ジョッキ。適度に酔うので飲みすぎ注意。落下スピードは標準。'
+      },
+      {
+        id: 'highball',
+        name: 'ハイボール',
+        abv: 7,
+        damage: '小 (+7%)',
+        color: '#f39c12',
+        image: '../images/whisky.png',
+        desc: 'シュワッと爽快な炭酸割。炭酸効果でアルコールが急速に体に回る。スピードはやや速め。'
+      },
+      {
+        id: 'wine',
+        name: 'ワイン',
+        abv: 12,
+        damage: '中 (+12%)',
+        color: '#7209b7',
+        image: '../images/cocktail.png',
+        desc: '芳醇なブドウの罠。お洒落だがアルコール度は12%と中々に高く、ゲーム中でも被弾しやすい。'
+      },
+      {
+        id: 'sake',
+        name: '日本酒',
+        abv: 15,
+        damage: '中 (+15%)',
+        color: '#f8f9fa',
+        image: '../images/sake.png',
+        desc: '米の旨味が凝縮した和の伝統酒。ぶつかると一気に千鳥足へ移行する要注意銘柄。'
+      },
+      {
+        id: 'kuchikami',
+        name: '口噛み酒',
+        abv: 18,
+        damage: '中〜高 (+18%)',
+        color: '#ff70a6',
+        image: '../images/sake.png',
+        desc: '野生酵母が生み出した強烈な味わいと高めの度数。足取りが一気に重くなる。'
+      },
+      {
+        id: 'shochu',
+        name: '焼酎',
+        abv: 25,
+        damage: '高 (+25%)',
+        color: '#52b788',
+        image: '../images/whisky.png',
+        desc: 'ロックでガツンと脳天を揺さぶる蒸留酒。非常に速い速度で落下してくる難敵。'
+      },
+      {
+        id: 'rubbing_alcohol',
+        name: '消毒用アルコール',
+        abv: 75,
+        damage: '極大 (+75%)',
+        color: '#00b4d8',
+        image: '', // 画像無しは髑髏マーク
+        desc: '【飲用不可】除菌用スプレー。ぶつかった瞬間にほぼゲームオーバーが確定する最悪の地雷オブジェクト。'
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. スタート画面アクションの構築
+      updateStartOverlayActions();
+      
+      // 2. データテーブルと図鑑の初期構築
+      loadLeaderboard();
+      loadUserStats();
+      buildCatalog();
+
+      // 3. ログイン更新イベント監視
+      document.addEventListener('YoizakuraStatsUpdated', (e) => {
+        loadLeaderboard();
+        loadUserStats();
+      });
+
+      // 4. モーダル等のイベント
+      document.getElementById('modal-close-btn').addEventListener('click', () => {
+        document.getElementById('auth-modal').style.display = 'none';
+      });
+
+      document.getElementById('login-submit-btn').addEventListener('click', () => handleAuthAction('login'));
+      document.getElementById('register-submit-btn').addEventListener('click', () => handleAuthAction('register'));
+
+      document.getElementById('retry-btn').addEventListener('click', () => {
+        document.getElementById('result-overlay').style.display = 'none';
+        if (window.gameInstance) {
+          window.gameInstance.start();
+        }
+      });
+    });
+
+    // タブ切り替え
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      // 対応するボタンとコンテンツをアクティブに
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.textContent.includes(
+        tabName === 'game' ? 'ゲーム' : (tabName === 'stats' ? '戦績' : '図鑑')
+      ));
+      if (activeBtn) activeBtn.classList.add('active');
+      
+      const activeContent = document.getElementById(`tab-content-${tabName}`);
+      if (activeContent) activeContent.classList.add('active');
+
+      // 戦績タブの場合データをリロード
+      if (tabName === 'stats') {
+        loadLeaderboard();
+        loadUserStats();
+      }
+    }
+
+    // スタート画面UI更新
+    function updateStartOverlayActions() {
+      const actionsDiv = document.getElementById('start-actions');
+      if (!actionsDiv) return;
+
+      const user = window.Auth.getCurrentUser();
+      if (user) {
+        actionsDiv.innerHTML = `
+          <button id="start-game-btn" class="btn-neon btn-neon-accent" style="width:100%; max-width:280px;">入店（スタート）</button>
+          <p style="color:var(--color-accent); font-size:0.85rem; margin-top:10px;">👤 ログイン中: ${user} 様</p>
+        `;
+        document.getElementById('start-game-btn').addEventListener('click', () => {
+          document.getElementById('start-overlay').style.display = 'none';
+          if (window.gameInstance) window.gameInstance.start();
+        });
+      } else {
+        actionsDiv.innerHTML = `
+          <button id="start-game-btn" class="btn-neon btn-neon-accent" style="width:100%; max-width:280px;">ゲストとしてスタート</button>
+          <button id="show-login-btn" class="btn-neon btn-neon-secondary" style="width:100%; max-width:280px; margin-top:10px;">会員ログイン / 登録</button>
+          <p style="color:var(--color-text-muted); font-size:0.75rem; margin-top:10px;">※ゲストプレイでも距離は「ゲスト」名義でランキングに保存されます。</p>
+        `;
+        document.getElementById('start-game-btn').addEventListener('click', () => {
+          document.getElementById('start-overlay').style.display = 'none';
+          if (window.gameInstance) window.gameInstance.start();
+        });
+        document.getElementById('show-login-btn').addEventListener('click', () => {
+          document.getElementById('auth-modal').style.display = 'flex';
+        });
+      }
+    }
+
+    // 認証送信処理
+    function handleAuthAction(type) {
+      const userField = document.getElementById('auth-username');
+      const passField = document.getElementById('auth-password');
+      const alertDiv = document.getElementById('auth-alert');
+
+      alertDiv.style.display = 'none';
+
+      try {
+        if (type === 'login') {
+          window.Auth.login(userField.value.trim(), passField.value.trim());
+        } else {
+          window.Auth.register(userField.value.trim(), passField.value.trim());
+        }
+        
+        document.getElementById('auth-modal').style.display = 'none';
+        window.Auth.updateHeaderAuth();
+        updateStartOverlayActions();
+        
+        // 最新データを反映
+        loadLeaderboard();
+        loadUserStats();
+
+        userField.value = '';
+        passField.value = '';
+      } catch (e) {
+        alertDiv.textContent = e.message;
+        alertDiv.style.display = 'block';
+      }
+    }
+
+    // ゲームオーバーリザルト呼び出し (game.jsからコールバック)
+    window.showResultModal = function(score, hitStats, fatalBlow) {
+      document.getElementById('final-score').textContent = Math.floor(score);
+      
+      const fatalDiv = document.getElementById('fatal-section');
+      if (fatalBlow) {
+        document.getElementById('fatal-drink-name').textContent = `${fatalBlow.name} (${fatalBlow.abv}%)`;
+        fatalDiv.style.display = 'block';
+      } else {
+        fatalDiv.style.display = 'none';
+      }
+
+      // 被弾数テーブルのロード
+      const tbody = document.getElementById('stats-tbody');
+      tbody.innerHTML = '';
+
+      const drinkKeys = [
+        'taiwan_beer', 'beer', 'highball', 'wine', 'sake', 'kuchikami', 'shochu', 'rubbing_alcohol'
+      ];
+
+      drinkKeys.forEach(key => {
+        const count = hitStats[key] || 0;
+        const catalogItem = CATALOG_DRINKS.find(d => d.id === key);
+        if (!catalogItem) return;
+
+        const tr = document.createElement('tr');
+        if (fatalBlow && fatalBlow.id === key) {
+          tr.style.background = 'rgba(255, 42, 133, 0.15)';
+        }
+
+        tr.innerHTML = `
+          <td>
+            <span class="stat-badge" style="background-color: ${catalogItem.color}; box-shadow: 0 0 6px ${catalogItem.color};"></span>
+            ${catalogItem.name}
+          </td>
+          <td style="color:var(--color-text-muted);">${catalogItem.abv}%</td>
+          <td style="text-align: right;" class="stat-count">${count} 回</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('result-overlay').style.display = 'flex';
+      
+      // バックグラウンドで戦績データを即時リロード
+      loadLeaderboard();
+      loadUserStats();
+    };
+
+    // ランキングのロード
+    function loadLeaderboard() {
+      const tbody = document.getElementById('leaderboard-tbody');
+      tbody.innerHTML = '';
+
+      const scores = JSON.parse(localStorage.getItem('yoizakura_scores') || '[]');
+      if (scores.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--color-text-muted);">まだハイスコア記録がありません。</td></tr>`;
+        return;
+      }
+
+      scores.forEach((entry, idx) => {
+        const tr = document.createElement('tr');
+        const currentUser = window.Auth.getCurrentUser() || 'ゲスト';
+        if (entry.user === currentUser) {
+          tr.style.background = 'rgba(255, 215, 0, 0.05)';
+        }
+
+        let rank = idx + 1;
+        if (idx === 0) rank = '🥇';
+        else if (idx === 1) rank = '🥈';
+        else if (idx === 2) rank = '🥉';
+
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: bold;">${rank}</td>
+          <td style="font-weight: 500;">${entry.user}</td>
+          <td style="text-align: right; font-weight: bold; color: var(--color-accent); font-family: 'Montserrat';">${entry.score} m</td>
+          <td style="text-align: right; font-size: 0.8rem; color: var(--color-text-muted);">${entry.date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // 個人統計のロード
+    function loadUserStats() {
+      const user = window.Auth.getCurrentUser() || 'ゲスト';
+      document.getElementById('stats-user-display').textContent = user;
+
+      const statsKey = `yoizakura_stats_${user}`;
+      const stats = JSON.parse(localStorage.getItem(statsKey) || '{}');
+
+      document.getElementById('stat-play-count').textContent = stats.playCount || 0;
+      document.getElementById('stat-total-distance').textContent = stats.totalDistance || 0;
+
+      const chart = document.getElementById('bar-chart-container');
+      chart.innerHTML = '';
+
+      const drinkKeys = [
+        'taiwan_beer', 'beer', 'highball', 'wine', 'sake', 'kuchikami', 'shochu', 'rubbing_alcohol'
+      ];
+
+      let totalHits = 0;
+      drinkKeys.forEach(k => totalHits += (stats[k] || 0));
+
+      if (totalHits === 0) {
+        chart.innerHTML = `<p style="color:var(--color-text-muted); text-align:center; padding: 25px 0;">まだ被弾したお酒のデータがありません。</p>`;
+        return;
+      }
+
+      drinkKeys.forEach(key => {
+        const count = stats[key] || 0;
+        const percent = Math.round((count / totalHits) * 100);
+        const catalogItem = CATALOG_DRINKS.find(d => d.id === key);
+        if (!catalogItem) return;
+
+        const row = document.createElement('div');
+        row.className = 'chart-row';
+        row.innerHTML = `
+          <div class="chart-label">${catalogItem.name}</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-fill" style="width: ${percent}%; background-color: ${catalogItem.color}; box-shadow: 0 0 8px ${catalogItem.color};"></div>
+          </div>
+          <div class="chart-value">${count}回 (${percent}%)</div>
+        `;
+        chart.appendChild(row);
+      });
+    }
+
+    // 図鑑カタログのロード
+    function buildCatalog() {
+      const container = document.getElementById('catalog-container');
+      container.innerHTML = '';
+
+      CATALOG_DRINKS.forEach(drink => {
+        const card = document.createElement('div');
+        card.className = 'catalog-card';
+        card.style.borderColor = `${drink.color}40`;
+
+        let imgHTML = '';
+        if (drink.image) {
+          imgHTML = `<img src="${drink.image}" alt="${drink.name}" class="catalog-img">`;
+        } else {
+          imgHTML = `
+            <div class="catalog-img-placeholder" style="background: linear-gradient(135deg, rgba(255,0,0,0.1), rgba(0,0,0,0.4)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; color:#ef4444; border-bottom:1px solid rgba(255,255,255,0.05);">
+              ☠
+            </div>
+          `;
+        }
+
+        const danger = drink.abv >= 50 ? '★★★★★ (危険極限)' : (drink.abv >= 20 ? '★★★★☆ (重度酔い)' : (drink.abv >= 10 ? '★★★☆☆ (要注意)' : '★☆☆☆☆ (微酔)'));
+
+        card.innerHTML = `
+          ${imgHTML}
+          <div class="catalog-info">
+            <h3 class="drink-name-title" style="color: ${drink.color};">${drink.name}</h3>
+            <div class="drink-meta">
+              <div><span class="meta-lbl">度数 (ABV):</span> <strong style="color:#fff;">${drink.abv}%</strong></div>
+              <div><span class="meta-lbl">酔い蓄積:</span> <strong style="color:var(--color-primary);">${drink.damage}</strong></div>
+              <div><span class="meta-lbl">危険度:</span> <span style="color:var(--color-accent);">${danger}</span></div>
+            </div>
+            <p class="drink-desc-text">${drink.desc}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
 </body>
 </html>
