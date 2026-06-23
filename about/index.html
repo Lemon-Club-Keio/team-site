@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ページタイトルを変更してください（例：メニュー | カフェ名） -->
+  <title>学校案内 | ○○未来大学</title>
+  <!-- 共通スタイル（ヘッダー・ナビ・フッター） -->
+  <link rel="stylesheet" href="../css/common.css">
+  <!-- このページ専用スタイル（style.css に自由に書いてください） -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== ヘッダー（common.css で管理） ===== -->
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="../index.html" class="nav-logo">サイト名</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="index.html">ページ1</a></li>
+        <li><a href="../page2/index.html">ページ2</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== メインコンテンツ ===== -->
+  <main class="about-main">
+
+    <!-- ヒーロー -->
+    <section class="about-hero">
+      <div class="hero-inner">
+        <img src="crest.png" alt="○○未来大学 校章" class="hero-crest">
+        <h1 class="hero-title">大学案内</h1>
+      </div>
+      <div class="hero-scroll-indicator">SCROLL<span></span></div>
+    </section>
+
+    <!-- ページ内ナビ -->
+    <nav class="page-anchors" aria-label="ページ内メニュー">
+      <div class="page-anchors-inner">
+        <a href="#greetings">学長・理事長の挨拶</a>
+        <a href="#philosophy">建学の精神</a>
+        <a href="#history">創立の歴史・沿革</a>
+        <a href="#identity">大学の特徴</a>
+        <a href="#symbol">シンボル</a>
+        <a href="#basic-info">基本情報</a>
+      </div>
+    </nav>
+
+    <!-- ① 学長・理事長の挨拶 -->
+    <section class="about-section" id="greetings">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">01</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">学長・理事長の挨拶</h2>
+            <p class="sec-subtitle">Message from President &amp; Chairman</p>
+          </div>
+        </div>
+
+        <!-- 学長メッセージ（大カード） -->
+        <article class="message-card message-card--president">
+          <div class="message-card-photo-wrap">
+            <img src="president.png" alt="学長 近影" class="message-photo">
+            <div class="message-photo-caption">
+              <span class="message-name-role">学長</span>
+              <span class="message-name">山田 一郎</span>
+            </div>
+          </div>
+          <div class="message-card-body">
+            <div class="message-role">学長メッセージ</div>
+            <blockquote class="message-quote">「知識を持つ人材」ではなく、<br>「知を使い社会を変える人材」を育成する。</blockquote>
+            <p>現代社会は、技術革新・価値観の多様化・国際化が同時に進行し、単一の正解が存在しない時代へと移行しています。その中で大学に求められる役割は、知識の伝達ではなく、「問いを立て続ける力」を養うことにあります。</p>
+            <p>本学は、専門性の深化とともに、分野横断的思考、倫理観、対話力を重視し、社会の複雑性に向き合う人材を育成します。</p>
+          </div>
+        </article>
+
+        <!-- 理事長メッセージ（小カード） -->
+        <article class="message-card message-card--chairman">
+          <div class="message-card-chairman-inner">
+            <img src="chairman.png" alt="理事長 近影" class="message-photo-sm">
+            <div>
+              <div class="message-role message-role--sm">理事長メッセージ ／ 鈴木 正雄</div>
+              <p class="message-quote-sm">「教育を通じた社会基盤の再構築」これが本学設立の原点です。</p>
+              <p>経済合理性のみでは測れない価値、すなわち「人間の尊厳」「地域の持続性」「知の公共性」を守り育てることが、私たちの使命です。大学は単なる教育機関ではなく、社会と共に成長する"知のインフラ"であるべきだと考えています。</p>
+            </div>
+          </div>
+        </article>
+
+
+        <div class="existence-box">
+          <h3>なぜこの大学が存在するのか</h3>
+          <p>本学は、「知識の蓄積」ではなく「社会変革の実装」を目的として設立されました。既存の学問体系を超え、現実社会の課題（環境・格差・地域衰退・テクノロジー倫理）に対し、実践的に応答する教育機関として存在しています。</p>
+          <ul class="role-list">
+            <li>地域社会の再生と知的支援拠点</li>
+            <li>次世代リーダーの育成機関</li>
+            <li>学術知と実社会の接続ハブ</li>
+            <li>持続可能社会の設計拠点</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 建学の精神 -->
+    <section class="about-section about-section--alt" id="philosophy">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">02</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">建学の精神・理念</h2>
+            <p class="sec-subtitle">Philosophy &amp; Mission</p>
+          </div>
+        </div>
+
+        <div class="spirit-banner">
+          <p class="spirit-text">「知は社会のためにあり、社会は知によって進化する」</p>
+        </div>
+
+        <div class="philosophy-grid">
+          <div class="philosophy-card">
+            <div class="philosophy-icon">📚</div>
+            <h3>教育理念</h3>
+            <ul>
+              <li>実践知と理論知の統合</li>
+              <li>自律的思考の育成</li>
+              <li>多様性の尊重と対話の重視</li>
+              <li>社会課題解決志向の教育</li>
+            </ul>
+          </div>
+          <div class="philosophy-card">
+            <div class="philosophy-icon">🌱</div>
+            <h3>育てたい人物像</h3>
+            <ul>
+              <li>自ら問いを立てる人</li>
+              <li>他者と協働し解を創る人</li>
+              <li>社会変化に適応し続ける人</li>
+              <li>倫理観を持って行動する人</li>
+            </ul>
+          </div>
+          <div class="philosophy-card">
+            <div class="philosophy-icon">🔭</div>
+            <h3>ミッション &amp; ビジョン</h3>
+            <ul>
+              <li>社会と共に学び、社会を再設計する人材を育成すること。</li>
+              <li>知の力で未来社会の構造そのものを更新する大学へ。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 創立の歴史・沿革 -->
+    <section class="about-section" id="history">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">03</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">創立の歴史・沿革</h2>
+            <p class="sec-subtitle">History &amp; Milestones</p>
+          </div>
+        </div>
+
+        <div class="history-intro">
+          <p>本学は、急速な産業構造の変化と地域社会の衰退を背景に、「大学の役割再定義」を目的として設立されました。創立者は、「知識が社会から孤立する構造」を問題視し、大学を<em>社会と接続する装置</em>として再設計する構想を掲げました。</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2005</div>
+            <div class="timeline-content">設立準備委員会発足</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2008</div>
+            <div class="timeline-content">学校法人設立認可</div>
+          </div>
+          <div class="timeline-item timeline-item--highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2010</div>
+            <div class="timeline-content">○○未来大学 開学（第1学部設置）</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2013</div>
+            <div class="timeline-content">大学院修士課程設置</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2016</div>
+            <div class="timeline-content">地域連携センター開設</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2019</div>
+            <div class="timeline-content">データサイエンス学部新設</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2022</div>
+            <div class="timeline-content">国際連携プログラム開始</div>
+          </div>
+          <div class="timeline-item timeline-item--highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2025</div>
+            <div class="timeline-content">新キャンパス「共創キャンパス」開設</div>
+          </div>
+        </div>
+
+        <div class="development-grid">
+          <div class="dev-card">
+            <h3>学部・大学院の展開</h3>
+            <ul>
+              <li><span class="dev-phase">開学当初</span>人間科学・社会創造系中心</li>
+              <li><span class="dev-phase">拡張期</span>情報科学・データ領域の導入</li>
+              <li><span class="dev-phase">現在</span>文理融合型教育へ完全移行</li>
+            </ul>
+          </div>
+          <div class="dev-card">
+            <h3>発展の節目</h3>
+            <ul>
+              <li>法人運営の透明化改革</li>
+              <li>地域企業との共同研究強化</li>
+              <li>海外大学との単位互換制度導入</li>
+              <li>実社会連携型カリキュラムの確立</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ 大学の特徴 -->
+    <section class="about-section about-section--alt" id="identity">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">04</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">大学の特徴・アイデンティティ</h2>
+            <p class="sec-subtitle">Identity &amp; Characteristics</p>
+          </div>
+        </div>
+        <p class="identity-lead">本学の特徴は、「理論と実践の往復運動」にあります。</p>
+
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h3>他大学との違い</h3>
+            <ul>
+              <li>研究中心ではなく「社会実装中心」</li>
+              <li>専門分化ではなく「融合教育」</li>
+              <li>教室完結ではなく「現場連動型学習」</li>
+            </ul>
+          </div>
+          <div class="identity-card">
+            <h3>大切にしてきた価値観</h3>
+            <ul>
+              <li>現場主義</li>
+              <li>対話主義</li>
+              <li>長期的視点</li>
+              <li>公共性の重視</li>
+            </ul>
+          </div>
+          <div class="identity-card identity-card--wide">
+            <h3>地域・社会との関わり</h3>
+            <p>地域企業・自治体・NPOと連携し、教育・研究を社会課題解決と直結させています。</p>
+            <h3 class="mt">伝統と革新</h3>
+            <p>伝統的な学問体系を尊重しつつ、AI・データ・グローバル課題への対応を統合した教育モデルを構築しています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ シンボル -->
+    <section class="about-section" id="symbol">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">05</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">シンボル要素</h2>
+            <p class="sec-subtitle">Symbol &amp; Identity Marks</p>
+          </div>
+        </div>
+
+        <div class="symbol-grid">
+          <div class="symbol-card">
+            <div class="symbol-logo-mark" aria-label="学章">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="60" cy="60" r="54" fill="none" stroke="#003087" stroke-width="4"/>
+                <circle cx="60" cy="60" r="38" fill="none" stroke="#003087" stroke-width="2"/>
+                <line x1="60" y1="6" x2="60" y2="114" stroke="#b8963e" stroke-width="2.5"/>
+                <line x1="6" y1="60" x2="114" y2="60" stroke="#b8963e" stroke-width="2.5"/>
+                <line x1="21" y1="21" x2="99" y2="99" stroke="#003087" stroke-width="1.5"/>
+                <line x1="99" y1="21" x2="21" y2="99" stroke="#003087" stroke-width="1.5"/>
+                <circle cx="60" cy="60" r="8" fill="#b8963e"/>
+              </svg>
+            </div>
+            <h3>学章</h3>
+            <p>「知の循環」をモチーフに、円環構造と交差する線で構成。過去・現在・未来の知が循環する意味を持つ。</p>
+          </div>
+
+          <div class="symbol-card">
+            <div class="color-swatches">
+              <div class="swatch swatch--navy">
+                <span>Deep Navy</span>
+                <small>知性・信頼</small>
+              </div>
+              <div class="swatch swatch--silver">
+                <span>Silver Grey</span>
+                <small>革新・中立性</small>
+              </div>
+            </div>
+            <h3>スクールカラー</h3>
+            <p>ディープネイビーを主軸に、シルバーグレーが知性と革新を象徴します。</p>
+          </div>
+
+          <div class="symbol-card">
+            <div class="slogan-display">知を、社会へ。<br>社会を、未来へ。</div>
+            <h3>スローガン &amp; 象徴建築</h3>
+            <p>「共創アトリウム」は学生・教員・地域が交わる中核施設。ガラス構造の開放型空間で、<em>境界をなくす学び</em>の象徴です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ 基本情報 -->
+    <section class="about-section about-section--alt" id="basic-info">
+      <div class="section-inner">
+        <div class="sec-head">
+          <span class="sec-num">06</span>
+          <div class="sec-title-group">
+            <h2 class="section-title">基本情報</h2>
+            <p class="sec-subtitle">Basic Information</p>
+          </div>
+        </div>
+
+        <dl class="info-table">
+          <div class="info-row">
+            <dt>創立年</dt>
+            <dd>2010年</dd>
+          </div>
+          <div class="info-row">
+            <dt>法人名</dt>
+            <dd>学校法人 未来共創学園</dd>
+          </div>
+          <div class="info-row">
+            <dt>大学名</dt>
+            <dd>○○未来大学</dd>
+          </div>
+          <div class="info-row">
+            <dt>所在地</dt>
+            <dd>神奈川県（架空設定）</dd>
+          </div>
+          <div class="info-row">
+            <dt>学部構成</dt>
+            <dd>人間科学部 ／ 社会デザイン学部 ／ 情報創造学部</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== フッター（common.css で管理） ===== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 チーム名</p>
+  </footer>
+
+</body>
+</html>
