@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酔っぱランナー</title>
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div class="top-nav">
+        <button class="nav-btn" onclick="location.href='login.html'">ログイン</button>
+        <button class="nav-btn" onclick="location.href='records.html'">記録</button>
+    </div>
+    
+    <div class="title-container">
+        <h1 class="game-title">酔っぱランナー</h1>
+    </div>
+    
+    <div class="main-content">
+        <div class="buttons-container">
+            <button class="start-btn"><span>始める</span></button>
+            <button class="rule-btn">ルール</button>
+        </div>
+    </div>
+
+    <!-- ルール説明モーダル -->
+    <div class="rule-modal" id="ruleModal" style="display: none;">
+        <div class="rule-content">
+            <h2>ルール：前から迫ってくるお酒をよけながらできるだけ遠くまで走る！！</h2>
+            <img src="images/rule.png" alt="ルールの説明イラスト">
+            <button class="close-rule-btn">閉じる</button>
+        </div>
+    </div>
+
+    <script>
+        const ruleBtn = document.querySelector('.rule-btn');
+        const ruleModal = document.getElementById('ruleModal');
+        const closeRuleBtn = document.querySelector('.close-rule-btn');
+        const startBtn = document.querySelector('.start-btn');
+
+        ruleBtn.addEventListener('click', () => {
+            ruleModal.style.display = 'flex';
+        });
+
+        closeRuleBtn.addEventListener('click', () => {
+            ruleModal.style.display = 'none';
+        });
+
+        startBtn.addEventListener('click', () => {
+            alert('ゲーム本編へ遷移します（他の方が作成中）');
+        });
+    </script>
+</body>
+</html>
